@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
@@ -29,6 +30,20 @@ android {
     }
     lint {
         abortOnError false
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.whosmyqueen'
+                artifactId = 'KeepAlivePerfect'
+                version = '1.0.4'
+            }
+        }
     }
 }
 
